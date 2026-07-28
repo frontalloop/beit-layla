@@ -1,0 +1,446 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   Beit Laila — Color system (extracted from logo, menu & frames)
+   ============================================================ */
+:root {
+  /* Hex tokens for direct CSS use */
+  --cream: #f7efe0; /* warm ivory background (frames bg) */
+  --cream-deep: #f0e4cc; /* deeper cream for section shifts */
+  --ivory: #fdf9f0; /* lightest surface */
+  --espresso: #2f2118; /* deep espresso brown (logo ink) */
+  --espresso-soft: #574232; /* softer brown for body copy */
+  --beige: #e8d9bd; /* soft beige */
+  --beige-deep: #dcc9a6;
+  --caramel: #c08a4e; /* warm caramel */
+  --bread: #a9662f; /* bread / crust tone */
+  --gold: #c6a55f; /* muted gold accent */
+  --sage: #6f7a4e; /* subtle muted green */
+  --tomato: #bd4d38; /* subtle tomato accent */
+
+  /* RGB channels powering Tailwind's <alpha-value> opacity modifiers */
+  --cream-rgb: 247 239 224;
+  --cream-deep-rgb: 240 228 204;
+  --ivory-rgb: 253 249 240;
+  --espresso-rgb: 47 33 24;
+  --espresso-soft-rgb: 87 66 50;
+  --beige-rgb: 232 217 189;
+  --beige-deep-rgb: 220 201 166;
+  --caramel-rgb: 192 138 78;
+  --bread-rgb: 169 102 47;
+  --gold-rgb: 198 165 95;
+  --sage-rgb: 111 122 78;
+  --tomato-rgb: 189 77 56;
+
+  --font-cormorant: "Cormorant Garamond", Georgia, serif;
+  --font-manrope: "Manrope", system-ui, sans-serif;
+  --font-cairo: "Cairo", system-ui, sans-serif;
+  --font-alexandria: "Alexandria", system-ui, sans-serif;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--cream);
+  color: var(--espresso);
+  font-family: var(--font-manrope);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Arabic typography defaults when document is RTL */
+html[dir="rtl"] body {
+  font-family: var(--font-cairo);
+}
+
+/* Selection */
+::selection {
+  background: var(--caramel);
+  color: var(--ivory);
+}
+
+/* Accessible focus ring */
+:focus-visible {
+  outline: 2px solid var(--bread);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Custom scrollbar (subtle, brand-toned) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--cream-deep);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--beige-deep);
+  border-radius: 999px;
+  border: 2px solid var(--cream-deep);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--caramel);
+}
+
+@layer components {
+  .container-lx {
+    @apply mx-auto w-full max-w-[1200px] px-5 sm:px-8;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.28em] text-bread;
+  }
+  html[dir="rtl"] .eyebrow {
+    @apply tracking-[0.14em];
+  }
+
+  .display {
+    font-family: var(--font-cormorant);
+    @apply font-semibold leading-[1.05];
+  }
+  html[dir="rtl"] .display {
+    font-family: var(--font-alexandria);
+    @apply font-bold leading-[1.2];
+  }
+
+  .btn {
+    @apply inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full px-7 text-sm font-semibold
+      transition-all duration-300 ease-out-expo focus-visible:outline-offset-4;
+  }
+  .btn-primary {
+    @apply btn bg-espresso text-ivory shadow-soft hover:-translate-y-0.5 hover:bg-espresso-soft hover:shadow-soft-lg;
+  }
+  .btn-ghost {
+    @apply btn border border-espresso/25 bg-transparent text-espresso hover:border-espresso/60 hover:bg-espresso/5;
+  }
+  .btn-whatsapp {
+    @apply btn bg-[#25623f] text-ivory shadow-soft hover:-translate-y-0.5 hover:bg-[#1f5235] hover:shadow-soft-lg;
+  }
+}
+
+/* Reveal animation base state (GSAP toggles these to visible) */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  will-change: transform, opacity;
+}
+
+/* Grain / paper texture overlay helper */
+.paper-texture {
+  background-image: radial-gradient(
+      circle at 20% 20%,
+      rgba(192, 138, 78, 0.05) 0,
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 80% 60%,
+      rgba(111, 122, 78, 0.045) 0,
+      transparent 40%
+    );
+}
+
+/* ============================================================
+   Reduced motion: neutralize animation, reveal everything
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Prevent layout shift / flash while fonts load */
+.no-scroll {
+  overflow: hidden !important;
+}
+
+/* One-time pulse for the floating WhatsApp button */
+@keyframes ping-once {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  70%,
+  100% {
+    transform: scale(2.1);
+    opacity: 0;
+  }
+}
+.animate-ping-once {
+  animation: ping-once 1.4s cubic-bezier(0, 0, 0.2, 1) 2;
+}
+
+/* ============================================================
+   PREMIUM LOADER
+   Initial visual state lives here (not JS) so the loader paints
+   instantly from the first server-rendered frame — no flash of
+   the hero, navbar, or an unstyled page. GSAP only drives the
+   hand, the press, and the doors opening.
+   ============================================================ */
+
+/* Instant, JS-free scroll lock while the loader is active.
+   The attribute is present in the server-rendered <html>, so the
+   page is locked before any script runs, and released on completion. */
+html[data-loading="true"],
+html[data-loading="true"] body {
+  overflow: hidden !important;
+  overscroll-behavior: none;
+  touch-action: none;
+}
+
+.loader-root {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100dvh;
+  z-index: 9999;
+  overflow: hidden;
+  background: transparent; /* the two opaque doors provide full cover */
+  pointer-events: auto;
+  perspective: 2000px;
+  -webkit-perspective: 2000px;
+}
+.loader-root.is-done {
+  pointer-events: none;
+}
+
+/* Doors — each slightly over half so there is never a seam gap */
+.loader-door {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: calc(50% + 1px);
+  background: var(--cream);
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.loader-door--left {
+  left: 0;
+  transform-origin: left center;
+  box-shadow: inset -60px 0 90px -55px rgba(47, 33, 24, 0.22);
+}
+.loader-door--right {
+  right: 0;
+  transform-origin: right center;
+  box-shadow: inset 60px 0 90px -55px rgba(47, 33, 24, 0.22);
+}
+
+/* Subtle door detailing: fine border, half-arch, geometric accents */
+.loader-door-motif {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: min(48vw, 380px);
+  color: var(--espresso);
+  opacity: 0.11;
+}
+.loader-door--left .loader-door-motif {
+  right: 0;
+}
+.loader-door--right .loader-door-motif {
+  left: 0;
+  transform: scaleX(-1);
+}
+.loader-door-motif [data-stroke] {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+.loader-door-motif [data-fill] {
+  fill: currentColor;
+  stroke: none;
+}
+
+/* Center seam line + warm light glow revealed as the doors part */
+.loader-seam {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 100%;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(47, 33, 24, 0.28),
+    transparent
+  );
+  opacity: 0;
+  z-index: 8;
+  pointer-events: none;
+}
+.loader-glow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(62vw, 540px);
+  height: 100%;
+  transform: translateX(-50%);
+  opacity: 0;
+  z-index: 7;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 42% 58% at 50% 46%,
+    rgba(214, 178, 110, 0.55),
+    rgba(247, 239, 224, 0) 70%
+  );
+}
+
+/* Centered logo stage (above the doors) */
+.loader-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+}
+.loader-logo-fade {
+  position: relative;
+  will-change: transform, opacity;
+}
+/* Stage 1 entrance is pure CSS → runs at first paint, before JS */
+.loader-logo-enter {
+  animation: loaderLogoEnter 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.loader-logo-press {
+  position: relative;
+  will-change: transform;
+}
+.loader-logo-img {
+  display: block;
+  width: 158px;
+  height: 158px;
+  border-radius: 26px;
+  object-fit: cover;
+  box-shadow: 0 18px 50px -20px rgba(47, 33, 24, 0.4);
+  -webkit-user-select: none;
+  user-select: none;
+}
+@media (min-width: 640px) {
+  .loader-logo-img {
+    width: 184px;
+    height: 184px;
+    border-radius: 30px;
+  }
+}
+.loader-shadow {
+  position: absolute;
+  left: 50%;
+  bottom: -24px;
+  width: 148px;
+  height: 24px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse,
+    rgba(47, 33, 24, 0.26),
+    transparent 70%
+  );
+  filter: blur(2px);
+  z-index: -1;
+  animation: loaderShadowEnter 0.6s ease both;
+}
+.loader-ripple {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 184px;
+  height: 184px;
+  margin: -92px 0 0 -92px;
+  border-radius: 9999px;
+  border: 2px solid var(--caramel);
+  opacity: 0;
+  transform: scale(0);
+  pointer-events: none;
+}
+.loader-brand {
+  margin-top: 38px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  animation: loaderBrandEnter 0.7s 0.15s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.loader-brand-hint {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--bread);
+}
+html[dir="rtl"] .loader-brand-hint {
+  letter-spacing: 0.18em;
+}
+.loader-hand {
+  position: absolute;
+  left: calc(50% - 8px);
+  top: calc(50% + 18px);
+  z-index: 11;
+  opacity: 0;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+@keyframes loaderLogoEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes loaderShadowEnter {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) scaleX(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scaleX(1);
+  }
+}
+@keyframes loaderBrandEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
