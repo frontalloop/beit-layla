@@ -8,7 +8,7 @@ import Hero from "@/components/Hero";
 import OurStory from "@/components/OurStory";
 import BreakfastExperience from "@/components/BreakfastExperience";
 import InteractiveMenu from "@/components/InteractiveMenu";
-import MenuPdf from "@/components/MenuPdf";
+import MenuSection from "@/components/MenuSection";
 import SocialMoments from "@/components/SocialMoments";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -40,7 +40,7 @@ export default function SiteShell() {
             <OurStory />
             <BreakfastExperience />
             <InteractiveMenu />
-            <MenuPdf />
+            <MenuSection />
             <SocialMoments />
             <Contact />
           </>

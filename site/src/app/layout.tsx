@@ -25,7 +25,7 @@ import "@fontsource/alexandria/latin-600.css";
 import "@fontsource/alexandria/latin-700.css";
 import "./globals.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
-import { SITE_URL, MENU_PDF_PATH } from "@/lib/constants";
+import { SITE_URL, MENU_URL } from "@/lib/constants";
 import {
   INSTAGRAM_URL,
   FACEBOOK_URL,
@@ -103,7 +103,7 @@ const structuredData = {
   url: SITE_URL,
   servesCuisine: ["Breakfast", "Bakery", "Egyptian", "Coffee"],
   telephone: PHONE_INTL_PRETTY,
-  menu: `${SITE_URL}${MENU_PDF_PATH}`,
+  menu: MENU_URL,
   priceRange: "$$",
   address: {
     "@type": "PostalAddress",

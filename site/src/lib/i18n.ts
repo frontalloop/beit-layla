@@ -33,8 +33,6 @@ interface Dict {
   cta: {
     viewMenu: string;
     orderWhatsapp: string;
-    openMenu: string;
-    download: string;
     call: string;
     directions: string;
     followInstagram: string;
@@ -68,12 +66,13 @@ interface Dict {
     items: OrbitItem[];
     swipeHint: string;
   };
-  menuPdf: {
+  menu: {
     eyebrow: string;
     heading: string;
     description: string;
-    previewAlt: string;
+    tabsLabel: string;
     note: string;
+    viewFull: string;
   };
   social: {
     eyebrow: string;
@@ -291,8 +290,6 @@ export const DICT: Record<Lang, Dict> = {
     cta: {
       viewMenu: "شوف المنيو",
       orderWhatsapp: "اطلب واتساب",
-      openMenu: "افتح المنيو",
-      download: "تحميل PDF",
       call: "اتصل بنا",
       directions: "افتح الموقع",
       followInstagram: "تابعنا على إنستجرام",
@@ -332,12 +329,13 @@ export const DICT: Record<Lang, Dict> = {
       items: ORBIT_AR,
       swipeHint: "اسحب لاستكشاف المكونات",
     },
-    menuPdf: {
+    menu: {
       eyebrow: "المنيو",
       heading: "منيو بيت ليلى",
-      description: "اكتشف اختيارات الفطار، المخبوزات والمشروبات.",
-      previewAlt: "غلاف منيو بيت ليلى",
-      note: "المنيو الكامل متاح كملف PDF عالي الجودة.",
+      description: "فطار، مشروبات وحلويات — كل ما نقدمه في مكان واحد.",
+      tabsLabel: "أقسام المنيو",
+      note: "تحب تشوف المنيو بالصور؟ قلّب صفحاته كاملة.",
+      viewFull: "شاهد المنيو كامل",
     },
     social: {
       eyebrow: "إنستجرام",
@@ -381,8 +379,6 @@ export const DICT: Record<Lang, Dict> = {
     cta: {
       viewMenu: "View Menu",
       orderWhatsapp: "Order on WhatsApp",
-      openMenu: "Open Menu",
-      download: "Download PDF",
       call: "Call Us",
       directions: "Get Directions",
       followInstagram: "Follow Us on Instagram",
@@ -422,12 +418,14 @@ export const DICT: Record<Lang, Dict> = {
       items: ORBIT_EN,
       swipeHint: "Swipe to explore the ingredients",
     },
-    menuPdf: {
-      eyebrow: "Menu",
-      heading: "Beit Laila Menu",
-      description: "Explore our breakfast, bakery and drinks selection.",
-      previewAlt: "Beit Laila menu cover",
-      note: "The full menu is available as a high-quality PDF.",
+    menu: {
+      eyebrow: "Our Menu",
+      heading: "The Menu",
+      description:
+        "Breakfast, drinks and sweets — everything we serve, in one place.",
+      tabsLabel: "Menu categories",
+      note: "Want to see it with photos? Flip through the full menu.",
+      viewFull: "View the Full Menu",
     },
     social: {
       eyebrow: "Instagram",

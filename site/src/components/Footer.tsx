@@ -4,7 +4,7 @@ import { useLanguage } from "@/components/LanguageProvider";
 import {
   INSTAGRAM_URL,
   FACEBOOK_URL,
-  MENU_PDF_PATH,
+  MENU_URL,
   PHONE_TEL,
   PHONE_INTL_PRETTY,
   LOGO_PATH,
@@ -79,7 +79,7 @@ export default function Footer() {
               ))}
               <li>
                 <a
-                  href={MENU_PDF_PATH}
+                  href={MENU_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-cream/80 transition-colors hover:text-caramel"

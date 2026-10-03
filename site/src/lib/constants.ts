@@ -30,8 +30,7 @@ export const MAP_URL =
 
 export const SITE_URL = "https://beitlaila.com";
 export const LOGO_PATH = "/logo.jpg";
-export const MENU_PDF_PATH = "/menu/beit-laila-menu.pdf";
-export const MENU_PREVIEW_PATH = "/menu/menu-preview.webp";
+export const MENU_URL = "https://online.fliphtml5.com/wanas1/MENU/";
 
 export const NAV_OFFSET = 84;
 export const SECTION_IDS = ["home", "story", "experience", "menu", "contact"];
