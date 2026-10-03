@@ -30,13 +30,13 @@ function applyDocument(lang: Lang) {
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  // Default language is Arabic.
-  const [lang, setLangState] = useState<Lang>("ar");
+  // Default language is English.
+  const [lang, setLangState] = useState<Lang>("en");
   const [ready, setReady] = useState(false);
 
   // Hydrate saved preference without losing the current scroll position.
   useEffect(() => {
-    let initial: Lang = "ar";
+    let initial: Lang = "en";
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored === "ar" || stored === "en") initial = stored;

@@ -1,10 +1,28 @@
 import type { Metadata, Viewport } from "next";
-import {
-  Cormorant_Garamond,
-  Manrope,
-  Cairo,
-  Alexandria,
-} from "next/font/google";
+// Fonts are bundled from npm (@fontsource) rather than next/font/google, so
+// the build never depends on Google Fonts answering during `next build`.
+// Family names are wired to the --font-* variables in globals.css.
+import "@fontsource/cormorant-garamond/latin-500.css";
+import "@fontsource/cormorant-garamond/latin-600.css";
+import "@fontsource/cormorant-garamond/latin-700.css";
+import "@fontsource/manrope/latin-400.css";
+import "@fontsource/manrope/latin-500.css";
+import "@fontsource/manrope/latin-600.css";
+import "@fontsource/manrope/latin-700.css";
+import "@fontsource/cairo/arabic-400.css";
+import "@fontsource/cairo/arabic-500.css";
+import "@fontsource/cairo/arabic-600.css";
+import "@fontsource/cairo/arabic-700.css";
+import "@fontsource/cairo/latin-400.css";
+import "@fontsource/cairo/latin-500.css";
+import "@fontsource/cairo/latin-600.css";
+import "@fontsource/cairo/latin-700.css";
+import "@fontsource/alexandria/arabic-500.css";
+import "@fontsource/alexandria/arabic-600.css";
+import "@fontsource/alexandria/arabic-700.css";
+import "@fontsource/alexandria/latin-500.css";
+import "@fontsource/alexandria/latin-600.css";
+import "@fontsource/alexandria/latin-700.css";
 import "./globals.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import { SITE_URL, MENU_PDF_PATH } from "@/lib/constants";
@@ -14,36 +32,11 @@ import {
   PHONE_INTL_PRETTY,
 } from "@/lib/constants";
 
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-cormorant",
-  display: "swap",
-});
-const manrope = Manrope({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-manrope",
-  display: "swap",
-});
-const cairo = Cairo({
-  subsets: ["arabic", "latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-cairo",
-  display: "swap",
-});
-const alexandria = Alexandria({
-  subsets: ["arabic", "latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-alexandria",
-  display: "swap",
-});
-
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "بيت ليلى | فطار ومخبوزات طازجة في دمياط الجديدة — Beit Laila",
+  title: "Beit Laila | Fresh Breakfast & Bakery in New Damietta — بيت ليلى",
   description:
-    "اكتشف فطار بيت ليلى، المخبوزات الطازجة، القهوة واختيارات الصباح في دمياط الجديدة. Discover fresh breakfast, pastries, coffee and morning favorites at Beit Laila in New Damietta.",
+    "Discover fresh breakfast, pastries, coffee and morning favorites at Beit Laila in New Damietta. اكتشف فطار بيت ليلى، المخبوزات الطازجة، القهوة واختيارات الصباح في دمياط الجديدة.",
   keywords: [
     "بيت ليلى",
     "Beit Laila",
@@ -66,8 +59,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "ar_EG",
-    alternateLocale: "en_US",
+    locale: "en_US",
+    alternateLocale: "ar_EG",
     url: SITE_URL,
     siteName: "Beit Laila — بيت ليلى",
     title: "بيت ليلى | Beit Laila — Fresh Breakfast & Bakery",
@@ -129,10 +122,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ar" dir="rtl" data-loading="true" suppressHydrationWarning>
-      <body
-        className={`${cormorant.variable} ${manrope.variable} ${cairo.variable} ${alexandria.variable}`}
-      >
+    <html lang="en" dir="ltr" data-loading="true" suppressHydrationWarning>
+      <body>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
